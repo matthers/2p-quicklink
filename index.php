@@ -2,19 +2,19 @@
 /**
  * Plugin Name: 2P Quicklink
  * Plugin URI: https://github.com/matthers/2p-quicklink
- * Description: Pluginul scaneaza link-urile din postari si le inlocuieste cu link-uri de afiliere 2Parale catre acea pagina
+ * Description: This plugin converts all links to active co
  * Version: 0.69	
  * Author: Razvan Manole
  * Author URI: http://razvan.manole.ro/
  * License: GPLv2 or later.
  */
+ 
 add_action('admin_menu', 'doipql');
 
 function doipql(){
         add_menu_page( '2P Quicklink', '2P Quicklink', 'manage_options', '2p-quicklink', 'admin_setari_doipql' );
 }
  function admin_setari_doipql(){
-//$affcode="bf60f816d";
 $codaff=get_option("doipql-affcode");
 if (empty($_POST['codaff'])) {
 $codaff=get_option("doipql-affcode");
@@ -34,7 +34,7 @@ Cod de afiliere nou: <input type="text" name="codaff" maxlength="35"  title="Pot
 <input type="submit">
 </form>
 <?
-echo "<br><br><hr><br>	Pentru detalii complete privind modul de functionare, eventuale bug-uri sau feature-uri dorite, click <b><a href=\"https://github.com/matthers/2p-quicklink\">aici</a></b>";
+echo "<br><br><hr><br>	Pentru detalii complete privind modul de functionare, eventuale bug-uri sau feature-uri dorite, click <b><a href=\"http://razvan.manole.ro/\">aici</a></b></b>";
 echo "<br>Creat de <b><a href=\"http://razvan.manole.ro/\">Razvan Manole</a></b><br><br><hr>";
 ?>
 <?
@@ -47,6 +47,8 @@ $url_fin_arr=array();
 
 foreach($urls as $urls) {
 array_push($url_arr, $urls);
+//Calling the API to transform the link
+
 $pbk="https://api.2performant.com/public/bookmarklet.json?redirect_to=";
 $cod=get_option("doipql-affcode");
 $book=$pbk.$urls."&buster=".rand(1,99999)."&token=".$cod;
